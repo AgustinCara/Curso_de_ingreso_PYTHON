@@ -43,6 +43,8 @@ class App(customtkinter.CTk):
         nombre = self.txt_nombre.get()
         Edad = self.txt_edad.get()
         saludo = "Usted se llama {0} y su edad es {1} años".format (nombre, Edad )
+        #saludo = f"usted se llama {nombre} y su edad es {edad} años"
+        #saludo = "Usted se llama: " " + nombre + " /nSu edad es: " +  edad  + "años"
         alert(title= "Saludo", message= saludo)
 
         
