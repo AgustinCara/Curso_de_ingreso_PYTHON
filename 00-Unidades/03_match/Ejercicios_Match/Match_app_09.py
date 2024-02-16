@@ -6,8 +6,8 @@ import customtkinter
 
 
 '''
-nombre:
-apellido:
+nombre:Agustin
+apellido: Carabajal
 ---
 Ejercicio: Match_09
 ---
@@ -57,8 +57,50 @@ class App(customtkinter.CTk):
         
     
     def btn_informar_on_click(self):
-        pass
-            
+        
+        tarifa_base = 15000
+        descuento = 0
+        aumento = 0
+
+        estaciones = self.combobox_estaciones.get()
+        destino = self.combobox_destino.get()
+
+
+        match (estaciones):
+            case "Invierno":
+                if destino == "Bariloche":
+                    aumento = 20
+                elif destino == "Cataratas" or destino == "Cordoba":
+                    descuento = 10
+                elif destino == "Mar del plata":
+                    descuento = 20
+        match (estaciones):
+            case "Verano":
+                if destino == "Bariloche":
+                    descuento = 20
+                elif destino == "Cataratas" or destino == "Cordoba":
+                    aumento = 10
+                elif destino == "Mar del plata":
+                    aumento = 20
+        match (estaciones):
+            case "Primavera"|"Otoño":
+                if destino == "Bariloche" or destino == "Cataratas" or destino == "Mar del plata":
+                    aumento = 10
+                elif destino == "Cordoba":
+                    aumento = 0
+
+        if descuento >= 10:
+            descuento_a_realizar = tarifa_base * descuento / 100
+            tarifa_con_descuento = tarifa_base - descuento_a_realizar
+            mensaje = f"De acuerdo al destino {destino} y la estacion del año {estaciones} se aplico un descuento del {descuento}%. y su tarifa total es ${tarifa_con_descuento}"
+        elif aumento >=10:
+            aumento_a_realizar = tarifa_base * aumento / 100
+            tarifa_con_aumento = tarifa_base + aumento_a_realizar
+            mensaje = f"De acuerdo al destino {destino} y la estacion del año {estaciones} se aplico un aumento del {aumento}%. y su tarifa total es ${tarifa_con_aumento}"
+        elif aumento == 0:
+            mensaje = f"La tarifa total es {tarifa_base}"
+        
+        alert ("UTN", mensaje)  
     
 if __name__ == "__main__":
     app = App()
